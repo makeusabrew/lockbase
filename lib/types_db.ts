@@ -12,67 +12,58 @@ export interface Database {
       license_instances: {
         Row: {
           created_at: string
-          email: string | null
           id: string
-          license_id: string | null
+          label: string | null
+          license_key: string | null
           status: string | null
         }
         Insert: {
           created_at?: string
-          email?: string | null
           id?: string
-          license_id?: string | null
+          label?: string | null
+          license_key?: string | null
           status?: string | null
         }
         Update: {
           created_at?: string
-          email?: string | null
           id?: string
-          license_id?: string | null
+          label?: string | null
+          license_key?: string | null
           status?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "license_instances_license_id_fkey"
-            columns: ["license_id"]
+            foreignKeyName: "license_instances_license_key"
+            columns: ["license_key"]
             referencedRelation: "licenses"
-            referencedColumns: ["checkout_id"]
+            referencedColumns: ["key"]
           }
         ]
       }
       licenses: {
         Row: {
-          checkout_id: string
           created_at: string
-          expires_at: string | null
-          is_live: boolean | null
+          idempotency_key: string | null
           key: string
           owner_email: string | null
-          product: string | null
           seats: number | null
           status: string | null
           support_expires_at: string | null
         }
         Insert: {
-          checkout_id: string
           created_at?: string
-          expires_at?: string | null
-          is_live?: boolean | null
+          idempotency_key?: string | null
           key?: string
           owner_email?: string | null
-          product?: string | null
           seats?: number | null
           status?: string | null
           support_expires_at?: string | null
         }
         Update: {
-          checkout_id?: string
           created_at?: string
-          expires_at?: string | null
-          is_live?: boolean | null
+          idempotency_key?: string | null
           key?: string
           owner_email?: string | null
-          product?: string | null
           seats?: number | null
           status?: string | null
           support_expires_at?: string | null
