@@ -1,10 +1,9 @@
-import BuyButton from "./payment/BuyButton";
+import BuyButton from "./payment/BuyButton"
 
 export default function Home() {
   return (
-    <main className="">
-      <div>Purchase a license</div>
-
+    <main className="mx-auto max-w-5xl p-10">
+      <h1 className="text-2xl font-semibold mb-10">Lockbase demo: purchase a license</h1>
       <BuyButton />
     </main>
   )

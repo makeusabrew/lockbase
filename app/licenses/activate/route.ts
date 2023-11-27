@@ -23,18 +23,13 @@ export async function POST(request: Request) {
 
   if (error || !data) {
     console.log(`Could not retrieve license key ${formattedKey}`)
-    return NextResponse.json({
-      ok: false,
-    })
+    return NextResponse.json({ instanceID: null }, { status: 404 })
   }
 
   const activations = data.license_instances as any[]
 
   if (activations.length >= (data.seats ?? 0)) {
-    return NextResponse.json({
-      ok: false,
-      error: 'License has no seats available',
-    })
+    return NextResponse.json({ instanceID: null }, { status: 400 })
   }
 
   const { data: instance, error: instanceError } = await client
@@ -48,13 +43,10 @@ export async function POST(request: Request) {
 
   if (instanceError || !instance || instance.length === 0) {
     console.error(`Could not activate license: ${instanceError?.message}`)
-    return NextResponse.json({
-      ok: false,
-    })
+    return NextResponse.json({ instanceID: null }, { status: 500 })
   }
 
   return NextResponse.json({
-    ok: true,
     instanceID: instance[0].id,
   })
 }

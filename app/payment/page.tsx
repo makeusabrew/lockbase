@@ -3,14 +3,9 @@ import { createAdminClient } from '@/lib/admin/supabase-admin'
 import { uuidToKey } from '@/lib/format-key'
 import { addYears } from 'date-fns'
 
-// TODO can probably remove?
-export const dynamic = 'force-dynamic'
-
-// TODO split off into a separate file...
 const getOrCreateLicense = async (sessionId: string) => {
   const sbAdmin = createAdminClient()
 
-  console.log(`Fetching checkout status for Stripe session ${sessionId}`)
   const checkout = await stripe.checkout.sessions.retrieve(sessionId)
   if (checkout.payment_status !== 'paid' || checkout.status !== 'complete') {
     return null

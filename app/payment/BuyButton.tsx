@@ -23,7 +23,9 @@ const createCheckoutSession = async () => {
 export default function BuyButton() {
   return (
     <form action={createCheckoutSession}>
-      <button type="submit">Buy now!</button>
+      <button type="submit" className="bg-indigo-600 rounded-md ring-1 ring-indigo-500 text-white px-3 py-2">
+        Buy now!
+      </button>
     </form>
   )
 }
