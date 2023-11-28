@@ -23,14 +23,12 @@ export async function POST(request: Request) {
   if (error) {
     console.error(`Error querying license information: ${error.message}`)
     return NextResponse.json({
-      ok: false,
       valid: false,
     })
   }
   if (!data) {
     console.log(`No matching license for key ${licenseKey} and instance ${instanceID}`)
     return NextResponse.json({
-      ok: true,
       valid: false,
     })
   }
@@ -38,7 +36,6 @@ export async function POST(request: Request) {
   console.log(`Retrieved license information for instance ${instanceID}`)
 
   return NextResponse.json({
-    ok: true,
     // TODO: factor in app version Vs license expiry: versions will need to be mapped to release dates
     valid: data.status === 'active',
     supported: data.support_expires_at ? new Date(data.support_expires_at) > new Date() : false,
