@@ -35,6 +35,7 @@ export interface Database {
           {
             foreignKeyName: "license_instances_license_key"
             columns: ["license_key"]
+            isOneToOne: false
             referencedRelation: "licenses"
             referencedColumns: ["key"]
           }
