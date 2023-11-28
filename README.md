@@ -16,3 +16,27 @@ to https:/stronglytyped.uk/articles/building-license-key-activation-system-nextj
 * Copy `.env.local.example` to `.local.env`
 * Populate the required environment variables: if you only want to use the API these are the `SUPABASE_xxx` properties,
 but if you want to enable payment and license creation you'll need to configure the `STRIPE_xxx` ones too
+
+## API usage
+
+### Activate a license
+
+Replace `label` and `licenseKey` with an appropriate label and a valid license key:
+
+```
+curl -X POST -H "Content-Type: application/json" http://localhost:3002/licenses/activate  -d '{"label": "foo", "licenseKey": "F0E7-BD01-A47D-
+40AA-8991-DF41-4B4B-A906"}'
+```
+
+If successful, you'll get a JSON response containing an instance ID:
+
+`{"instanceID":"e0a689fa-d9a8-4394-b5dd-d2c6ba107b19"}`
+
+This instance ID can be used in conjunction with the license key to periodically validate the license/instance pair:
+
+### Validate a license instance
+
+```
+curl -X POST -H "Content-Type: application/json" http://localhost:3002/licenses/validate  '{"instanceID": "e0a689fa-d9a8-4394-b5dd-d2c6ba
+107b19","licenseKey": "F0E7-BD01-A47D-40AA-8991-DF41-4B4B-A906"}'
+```

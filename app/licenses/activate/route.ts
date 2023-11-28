@@ -35,7 +35,7 @@ export async function POST(request: Request) {
   const { data: instance, error: instanceError } = await client
     .from('license_instances')
     .insert({
-      license_id: data.key,
+      license_key: data.key,
       label,
       status: 'active',
     })
