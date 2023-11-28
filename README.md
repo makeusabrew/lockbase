@@ -14,8 +14,11 @@ to https://stronglytyped.uk/articles/building-license-key-activation-system-next
 * Clone the repository
 * Run `npm i`
 * Copy `.env.local.example` to `.local.env`
+* Set up a Supabase project
+* Import `schema.sql` into your Supabase project
 * Populate the required environment variables: if you only want to use the API these are the `SUPABASE_xxx` properties,
 but if you want to enable payment and license creation you'll need to configure the `STRIPE_xxx` ones too
+* If you do want to enable license purchase/creation, you'll need a Stripe account too
 
 ## API usage
 
